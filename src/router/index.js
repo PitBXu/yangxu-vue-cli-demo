@@ -22,9 +22,21 @@ Vue.use(Router)
 
 export default new Router({
   routes: [
-    {path: '/',name: "homeLink",component: Home},
+    {path: '/',name: "homeLink",components: {
+      default: Home, // 显示在默认 <router-view/> 中的内容
+      'orderingGuide': OrderingGuide, // 显示在 name 为 orderingGuide 的 <router-view/> 中的内容
+      'delivery': Delivery,
+      'history': History
+    }},
     {path: '/menu',name: "menuLink",component: Menu},
-    {path: '/admin',name: "adminLink",component: Admin},
+    // 路由独享守卫的用法和全局守卫一样   守卫  ==>  拦截
+    {path: '/admin',name: "adminLink",component: Admin
+      ,beforeEnter:(to,from,next)=>{
+        //alert("dafssfdf");
+        // store 拿到登录状态
+        next();
+      }
+    },
     {path: '/login',name: "loginLink",component: Login},
     {path: '/register',name: "registerLink",component: Register},
     {path: '/about',redirect: '/about/contact',name: "aboutLink",component: About,
@@ -41,5 +53,16 @@ export default new Router({
     // default
     {path: '*',redirect: '/'}
   ],
-  mode: 'history'
+  mode: 'history',
+  scrollBehavior(to,from,savedPosition){
+    //return {x:0, y:100}; // 控制路由的 滚动展示范围
+    //return {selector: '.btn'} // 返回页面滚动到 第一个 class = 'btn' 的标签
+    if (savedPosition){
+      //  savedPosition 只有当使用浏览器的前进后退按钮时才会触发
+      // 如果当触发了浏览器的前进后退按钮时，会回退到上次浏览的位置
+      return savedPosition;
+    }else{
+      return {x:0, y:0};
+    }
+  }
 })

@@ -54,3 +54,58 @@
         <p class="card-text">TEL:18988999256</p>
     </div>
 </div>
+
+<script>
+    export default{
+        // data(){
+        //     return {
+        //         name: "Henry"
+        //     }
+        // },
+        // beforeRouteEnter: (to,from,next) => {
+        //     //alert("Hello " + this.name); // 在数据渲染之前访问，得到 undefined
+        //     //next();
+        //     // 使用回调函数来访问 name 属性
+        //     next(vm => {
+        //         alert("Hello " + vm.name);
+        //     })
+        // },
+        // beforeRouteLeave: (to,from,next) => {
+        //     if (confirm("确定离开吗？")){
+        //         next();
+        //     }else{
+        //         next(false);
+        //     }
+        // }
+    }
+</script>
+
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12 col-md-4">
+            <router-view name="orderingGuide"></router-view>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <router-view name="delivery"></router-view>
+        </div>
+        <div class="col-sm-12 col-md-4">
+            <router-view name="history"></router-view>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div id="home" class="col-sm-12 text-center">
+        <div class="background">
+            <h1>欢迎大家品尝pizza！</h1>
+            <h2>这里有你非常喜欢的pizza</h2>
+        </div>
+    </div>
+</div>
+
+<style>
+#home{
+    background: url('../../src/assets/pizza.jpg');
+}
+</style>
